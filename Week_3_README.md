@@ -25,7 +25,8 @@
 
 The same Logistic Regression model was trained on **20 different random splits** of the training data.
 
-![alt text](image-8.png)
+<img width="452" height="347" alt="image-8" src="https://github.com/user-attachments/assets/7134084b-95bf-467a-883b-7d6a4651c36a" />
+
 
 | Metric | Value |
 |---|---|
@@ -53,7 +54,8 @@ Both models rank customers almost identically (overlapping AUC intervals). Logis
 
 ### 3.1 Validation curve for Logistic Regression `C`
 
-![Validation curve](images/02_validation_curve_lr.png)
+<img width="457" height="353" alt="image" src="https://github.com/user-attachments/assets/43cc5e3e-f6ab-48dd-85da-f8b9dde933b3" />
+
 
 - **Underfitting** at strong regularization (`C < 1e-2`): both train and CV AUC fall to about 0.83.
 - **Plateau** for `0.1 <= C <= 10`: CV AUC about 0.846 vs train about 0.850.
@@ -78,7 +80,8 @@ Both models rank customers almost identically (overlapping AUC intervals). Logis
 - Up to 2,000 trees allowed; early stopping selected **247 trees**.
 - Validation ROC-AUC: **0.8541**.
 
-![XGBoost loss curves](images/03_xgb_loss_curve.png)
+<img width="477" height="350" alt="image" src="https://github.com/user-attachments/assets/06d311a8-2603-4765-8e51-a20e5269f970" />
+
 
 Training loss keeps falling while validation loss flattens near the early-stopping point, the classic sign that more trees would start fitting noise.
 
@@ -90,7 +93,8 @@ Training loss keeps falling while validation loss flattens near the early-stoppi
 
 ### 4.3 Feature importance (gain)
 
-![XGBoost feature importance](images/04_xgb_feature_importance.png)
+<img width="625" height="336" alt="image" src="https://github.com/user-attachments/assets/e9eacb30-bc11-49c0-ac86-3101a658ff09" />
+
 
 The strongest drivers of churn are **fiber-optic internet**, **contract type** and **electronic-check payment**. Several "No internet service" indicators also rank highly, but they are largely redundant with one another (see PCA below).
 
@@ -102,7 +106,8 @@ The strongest drivers of churn are **fiber-optic internet**, **contract type** a
 
 ### Choosing k
 
-![Elbow and silhouette](images/05_elbow_silhouette.png)
+<img width="747" height="302" alt="image" src="https://github.com/user-attachments/assets/1c1dca21-ec4b-4ec6-876a-1907c0dd6236" />
+
 
 The elbow bends around **k = 4**. Silhouette peaks at k = 2, but two segments are too coarse for targeted action, so **k = 4** is chosen as the balance between cluster quality and business usefulness.
 
@@ -125,13 +130,15 @@ The elbow bends around **k = 4**. Silhouette peaks at k = 2, but two segments ar
 
 ### 6.1 Scree plot
 
-![PCA scree plot](images/06_pca_scree.png)
+<img width="490" height="342" alt="image" src="https://github.com/user-attachments/assets/b45b6534-7a26-4203-83d0-6574f0d098e1" />
+
 
 **15 of 30** components are needed to retain 90% of the variance, so information is spread across many dimensions rather than a few dominant ones.
 
 ### 6.2 Customers in two dimensions
 
-![PCA 2D projection](images/07_pca_2d_churn.png)
+<img width="537" height="360" alt="image" src="https://github.com/user-attachments/assets/60a212e8-c5fe-4af7-b591-a5c0132da5d6" />
+
 
 Churners (red) and non-churners (blue) overlap heavily in the first two components, so two dimensions are not enough to separate the classes. The top PC1 loadings (about 0.302 each) are all "No internet service" indicators (`InternetService_No`, `OnlineSecurity`, `TechSupport`, `StreamingTV`, `DeviceProtection` and `OnlineBackup`), which move together and are highly redundant.
 
